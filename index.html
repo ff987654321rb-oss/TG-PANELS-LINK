@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<title>TG Gaming Pro</title>
+
+<style>
+body {
+    margin: 0;
+    background: black;
+    color: white;
+    font-family: Arial;
+    text-align: center;
+}
+
+/* HEADER */
+header {
+    background: #00ffcc;
+    color: black;
+    padding: 15px;
+    font-size: 25px;
+}
+
+/* LOGIN */
+#loginBox {
+    margin-top: 50px;
+}
+
+/* MAIN SITE */
+#mainSite {
+    display: none;
+    padding: 20px;
+}
+
+/* CARD */
+.card {
+    background: #111;
+    padding: 20px;
+    margin: 15px;
+    display: inline-block;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #00ffcc;
+}
+
+/* BUTTON */
+button {
+    padding: 10px 20px;
+    background: #00ffcc;
+    border: none;
+    cursor: pointer;
+}
+
+/* LOADER */
+#loader {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: black;
+    color: #00ffcc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+</style>
+
+  </head>
+
+  <body>
+
+	<!-- LOADER -->
+	<div id="loader">Loading...</div>
+
+	<header>TG GAMING PRO</header>
+
+	<!-- LOGIN -->
+	<div id="loginBox">
+	  <h2>Login</h2>
+	  <input id="user" placeholder="Username"><br><br>
+	  <input id="pass" type="password" placeholder="Password"><br><br>
+	  <button onclick="login()">Login</button>
+	</div>
+
+	<!-- MAIN -->
+	<div id="mainSite">
+
+	  <h1>🔥 TG Gaming 🎮</h1>
+
+	  <!-- DOWNLOAD -->
+	  <div class="card">
+        <h3>Tool 1</h3>
+        <button onclick="download()">Download</button>
+	  </div>
+
+	  <!-- TOURNAMENT -->
+	  <div class="card">
+        <h3>🏆 Tournament</h3>
+        <button onclick="join()">Join</button>
+	  </div>
+
+	  <br><br>
+	  <a href="https://t.me/sgbosspanel">
+        <button>Join Telegram</button>
+	  </a>
+
+	</div>
+
+<script>
+
+// LOADER HIDE
+window.onload = function(){
+    document.getElementById("loader").style.display="none";
+}
+
+// LOGIN (PASTEBIN)
+async function login() {
+
+    let user = document.getElementById("user").value;
+    let pass = document.getElementById("pass").value;
+
+    let url = "https://pastebin.com/raw/zFmNjVc7"; // 👈 CHANGE HERE
+
+    let res = await fetch(url);
+    let text = await res.text();
+
+    let lines = text.split("\n");
+
+    let success = false;
+
+    for(let i=0;i<lines.length;i++){
+        let parts = lines[i].split(":");
+
+        if(parts[0] == user && parts[1] == pass){
+            success = true;
+        }
+    }
+
+    if(success){
+        document.getElementById("loginBox").style.display="none";
+        document.getElementById("mainSite").style.display="block";
+    } else {
+        alert("Wrong ID Password");
+    }
+}
+
+// DOWNLOAD COUNTER
+let count = localStorage.getItem("dl") || 0;
+
+function download(){
+    count++;
+    localStorage.setItem("dl", count);
+    alert("Downloaded: " + count);
+}
+
+// TOURNAMENT
+function join(){
+    alert("Joined Tournament 🔥");
+}
+
+// BLOCK RIGHT CLICK
+document.addEventListener("contextmenu", e => e.preventDefault());
+
+</script>
+
+  </body>
+</html>
